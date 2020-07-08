@@ -16,6 +16,7 @@ import (
 	"github.com/kyokomi/emoji"
 	"github.com/microsoft/fabrikate/core"
 	"github.com/microsoft/fabrikate/logger"
+	"github.com/microsoft/fabrikate/util"
 	"github.com/otiai10/copy"
 	"github.com/timfpark/yaml"
 
@@ -469,7 +470,7 @@ func getRepoName(url string) (string, error) {
 		return "", fmt.Errorf("no repositories to show")
 	}
 	for _, re := range f.Repositories {
-		if strings.EqualFold(re.URL, url) {
+		if util.EqualURLs(re.URL, url) {
 			logger.Info(emoji.Sprintf(":green_heart: %v matches repo %v", url, re.Name))
 			return re.Name, nil
 		}
